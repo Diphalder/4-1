@@ -1,0 +1,30 @@
+##########  MASM  #########################
+
+[only on C-drive]
+
+__________// create object file  from assembly code//______________
+
+ml /c /Zd /coff "helloworld.asm"
+
+__________// create exe file //______________
+
+Link /SUBSYSTEM:CONSOLE "helloworld.obj"
+
+
+_________// execute exe file //_____________
+
+
+./"helloworld.exe"             // on VScode
+
+or 
+
+helloworld.exe                 // on cmd
+
+
+#####################################
+
+
+
+
+
+
