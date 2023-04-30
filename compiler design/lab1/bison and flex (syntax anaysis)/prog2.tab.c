@@ -67,7 +67,7 @@
 /* Copy the first part of user declarations.  */
 
 /* Line 189 of yacc.c  */
-#line 1 "prog1.y"
+#line 1 "prog2.y"
 
 #include<stdio.h>
 void yyerror(char *s);
@@ -75,7 +75,7 @@ int yylex();
 
 
 /* Line 189 of yacc.c  */
-#line 79 "prog1.tab.c"
+#line 79 "prog2.tab.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -122,7 +122,7 @@ typedef int YYSTYPE;
 
 
 /* Line 264 of yacc.c  */
-#line 126 "prog1.tab.c"
+#line 126 "prog2.tab.c"
 
 #ifdef short
 # undef short
@@ -1308,7 +1308,7 @@ yyreduce:
       
 
 /* Line 1464 of yacc.c  */
-#line 1312 "prog1.tab.c"
+#line 1312 "prog2.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1520,7 +1520,7 @@ yyreturn:
 
 
 /* Line 1684 of yacc.c  */
-#line 12 "prog1.y"
+#line 12 "prog2.y"
 
 
 int main()

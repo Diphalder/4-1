@@ -1,0 +1,6 @@
+clear			-> to clear workspace
+clc			-> to clr command
+
+; 			-> not to show the ouput in comannd
+
+doc size 		-> for help

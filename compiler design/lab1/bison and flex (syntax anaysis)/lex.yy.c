@@ -463,9 +463,9 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "prog1.l"
-#line 4 "prog1.l"
-#include "prog1.tab.h"
+#line 1 "prog2.l"
+#line 4 "prog2.l"
+#include "prog2.tab.h"
 #line 470 "lex.yy.c"
 
 #define INITIAL 0
@@ -653,7 +653,7 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 7 "prog1.l"
+#line 7 "prog2.l"
 
 #line 659 "lex.yy.c"
 
@@ -740,22 +740,22 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 8 "prog1.l"
+#line 8 "prog2.l"
 {return(N);}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 9 "prog1.l"
+#line 9 "prog2.l"
 {return(V);}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 10 "prog1.l"
+#line 10 "prog2.l"
 {return(O);}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 11 "prog1.l"
+#line 11 "prog2.l"
 ECHO;
 	YY_BREAK
 #line 762 "lex.yy.c"
@@ -1756,6 +1756,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 11 "prog1.l"
+#line 11 "prog2.l"
 
 
