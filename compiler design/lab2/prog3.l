@@ -10,7 +10,7 @@ letter [A-Za-z]
 
 %%
 ("+"|"-"|"")({digit})*(".")({digit})+ {printf("FLOAT ->%s\t",yytext);}
-({digit})* {printf("INT ->%s\t",yytext);} 
+("+"|"-"|"")({digit})* {printf("INT ->%s\t",yytext);} 
 . {}
 %%
 

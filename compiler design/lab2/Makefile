@@ -5,7 +5,7 @@ main:
 m1:
 	flex prog2.l
 	gcc lex.yy.c
-	a.exe <input.txt >output.txt
+	a.exe <input.txt
 m3:
 	flex prog3.l
 	gcc lex.yy.c

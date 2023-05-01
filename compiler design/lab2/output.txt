@@ -1,1 +1,1 @@
-INT ->10	ADD ->+	INT ->20	
+data type ->int	id ->a	assignment ->=	integer number ->135	semicolon ->;	

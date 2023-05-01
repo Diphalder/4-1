@@ -3,7 +3,7 @@
 
 void myPrinthelloMake()
 {
-    printf("dip halder\n");
+    printf("i am the function .c file\n");
     return;
 
 }

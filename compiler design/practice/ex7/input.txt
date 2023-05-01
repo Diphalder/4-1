@@ -1,0 +1,9 @@
+main()
+{
+    int a = 4;
+    float b ;
+    if(a<b)
+    {
+        float b  = 125.2;  
+    }
+}

@@ -21,5 +21,5 @@ int main()
 
 void yyerror(char *s)
 {
-    fprintf(stderr, "error: %s\n", s);
+    fprintf(stderr, "    error: %s\n", s);
 }
