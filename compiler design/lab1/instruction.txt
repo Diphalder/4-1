@@ -43,7 +43,10 @@ g++ -c -o hi.o hi.i
 g++ -c -o hi.o hi.s
 
 
-____//mechine code(.exe) ==>> assemblycode(.s)____[deassemble]____//logical address+mechine-code +assembly code//______________________
+____//mechine code(.exe) ==>> assemblycode(.s)____[deassemble]____//_________
+_____________logical address+mechine-code +assembly code//______________________
+
+
 objdump -M  intel -d text.o > text.dump
 
 objdump -M  intel -d textf.exe > text.dump
@@ -57,7 +60,7 @@ g++ hi.i -o hi.exe
 
 
 
-____________// run form make file
+____________// run form make file //__________________
 make 
 make main
 
@@ -74,3 +77,35 @@ ______________// run bison code //_____________--
 	flex p5.l
 	gcc p5.tab.c lex.yy.c
 	a.exe <input.txt
+
+
+
+____________// create all file from (.c/c++)//______________
+	
+	gcc text.c -o text.exe
+	gcc -E text.c > text.i
+	gcc -S -masm=intel text.i
+	gcc -c -o text.o text.c
+	objdump -M  intel -d text.exe > text.dump
+	text.exe
+
+m1:
+	g++ hi.cpp -o hi.exe
+	g++ -E hi.cpp > hi.i
+	g++ -S -masm=intel hi.i
+	g++ -c -o hi.o hi.cpp
+	objdump -M  intel -d hi.exe > hi.dump
+	hi.exe
+
+______________// clear file //___________________
+
+clean:
+	rm -f *.o
+
+				[note:clear all .o file from the dir]
+
+
+
+
+
+
