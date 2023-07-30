@@ -1,0 +1,23 @@
+% Input signals
+x = [1 2 3 4]; % Signal x(n)
+h = [0.5 0.5]; % Signal h(n)
+
+% Lengths of signals
+M = length(x);
+N = length(h);
+
+% Length of the resulting convolution
+L = M + N - 1;
+
+% Initialize the resulting convolution sequence
+y = zeros(1, L);
+
+% Perform convolution
+for n = 1:L
+    for k = max(1, n-M+1):min(n, N)
+        y(n) = y(n) + x(n-k+1) * h(k);
+    end
+end
+
+% Display the result
+disp(y);

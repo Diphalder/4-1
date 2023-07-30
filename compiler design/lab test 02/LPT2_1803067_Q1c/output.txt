@@ -1,0 +1,3 @@
+In line no :1, Inserting  "P" with type  "CHAR_TYPE" in symbol table.
+In line no :1, Data type  "CHAR_TYPE" is not matched with Data type  "INT_TYPE".
+Parsing finished!

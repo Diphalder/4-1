@@ -7,6 +7,38 @@
 	void yyerror();
 	extern int lineno;
 	extern int yylex();
+    /*
+    START, 
+    HALT, 
+    LD_INT, 
+    LD_VAR, 
+    STORE, 
+    SCAN_INT_VALUE, 
+    PRINT_INT_VALUE, 
+    ADD,
+    MUL
+    GT_OP,
+    LT_OP,
+    IF_START,
+    ELSE_START,
+    ELSE_END,
+    WHILE_LABEL,
+    WHILE_START,
+    WHILE_END
+
+
+    UNDEF_TYPE 0
+    INT_TYPE 1
+    REAL_TYPE 2
+    CHAR_TYPE 3
+
+    void insert(char* name, int type);
+    list_t* search(char *name);
+    int idcheck(char* name);
+    int gettype(char *name);
+    int typecheck(int type1, int type2); 
+    
+    */
 %}
 
 %union

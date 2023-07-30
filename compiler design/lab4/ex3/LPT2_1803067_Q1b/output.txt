@@ -1,0 +1,13 @@
+In line no :1, Inserting  "i" with type  "INT_TYPE" in symbol table.
+In line no :2, Data type  "INT_TYPE" is not matched with Data type  "REAL_TYPE".
+In line no :3, ID "j" is not declared.
+In line no :3, Data type  "UNDEF_TYPE" is not matched with Data type  "INT_TYPE".
+In line no :3, Data type  "UNDEF_TYPE" is not matched with Data type  "INT_TYPE".
+In line no :5, ID "a" is not declared.
+In line no :5, Data type  "UNDEF_TYPE" is not matched with Data type  "INT_TYPE".
+In line no :6, Data type  "INT_TYPE" is not matched with Data type  "UNDEF_TYPE".
+In line no :6, ID "j" is not declared.
+In line no :6, ID "j" is not declared.
+In line no :7, ID "k" is not declared.
+ for loop initial-identifiter = 'i' and Next-identifier = 'k' is not same 
+Parsing finished!

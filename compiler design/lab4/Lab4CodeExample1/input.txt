@@ -1,0 +1,10 @@
+int a ;
+int d ;
+int c= 10 + e * 100;
+int x;
+x = a * 100.1;
+double hi = 135.0;
+hi = hi + 10;
+int ruet =10;
+int z  = ruet +10;
+

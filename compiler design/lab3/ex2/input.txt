@@ -1,0 +1,3 @@
+int a = 4;
+float b ;
+float b  = 125.2;  

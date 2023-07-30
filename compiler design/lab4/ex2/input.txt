@@ -1,0 +1,9 @@
+dim i as integer
+For i = 1 To 9.9
+    For j = 10 To 20
+    dim l as integer
+    dim af as integer
+    For l = 10.3 To 20
+    Next k
+Next i
+Next k

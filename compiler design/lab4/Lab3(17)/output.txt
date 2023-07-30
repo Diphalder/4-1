@@ -1,0 +1,17 @@
+NUM 2=2
+term 2=2
+NUM 3=3
+term MUL NUM 3*5=15
+exp ADD term 2+15=17
+NUM 4=4
+term DIV NUM 4/2=2
+exp SUB term 17-2=15
+RESULT = 15
+NUM 2=2
+term 2=2
+NUM 3=3
+exp SUB term 2-3=-1
+NUM 1=1
+exp SUB term -1-1=-2
+RESULT = -2
+Parsing Finished

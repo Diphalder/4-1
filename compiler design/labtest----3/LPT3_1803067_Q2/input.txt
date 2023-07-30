@@ -1,0 +1,4 @@
+LET a as INT =  SCAN();
+LET c as INT = SCAN() - a + 2; 
+PRINT(c);
+PRINT(10);

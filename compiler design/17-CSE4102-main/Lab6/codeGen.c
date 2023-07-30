@@ -161,6 +161,16 @@ void print_assembly()
                             printf("\tadd ebx, 4\n");
                             printf("\n");
                             break;
+            case MUL:
+                            printf("\tsub ebx, 4\n");
+                            printf("\tmov eax, [ebx]\n");
+                            printf("\tsub ebx, 4\n");
+                            printf("\tmov edx, [ebx]\n");
+                            printf("\tIMUL eax, edx\n");
+                            printf("\tmov dword ptr [ebx], eax\n");
+                            printf("\tadd ebx, 4\n");
+                            printf("\n");
+                            break;                
             case GT_OP:
                             printf("\tsub ebx, 4\n");
                             printf("\tmov eax, [ebx]\n");

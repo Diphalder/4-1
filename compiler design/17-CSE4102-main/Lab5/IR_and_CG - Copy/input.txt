@@ -1,0 +1,6 @@
+int a;
+int b;
+int c=200;
+scan(a);
+b = a + 10-5 + c;
+print(b);

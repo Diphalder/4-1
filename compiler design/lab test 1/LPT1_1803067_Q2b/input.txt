@@ -1,1 +1,3 @@
-I eat Rice
+We bought 1 Apple
+You sold 50 Mangoes
+We Wanted 0 Oranges

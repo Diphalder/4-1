@@ -1,0 +1,9 @@
+CHAR P = 'a';
+P = P + 'x';
+P++;
+INT a ;
+a = b+ c ;
+b = d + 1.6 ;
+INT b = 1.5  ;
+FLAOT v = 'c';
+a =a / b * c ;

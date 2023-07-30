@@ -1,0 +1,17 @@
+x = [1, 2, 0 , -3 ,4 , 0 , 0];
+h = [0, 0 , 4 , 0 , -5 , 1, 0 ];
+index = 2
+
+% ques Q1.A
+zt(x,index)
+zt(h,index)
+
+
+% Q1 .B
+
+ztrans(x)
+ztrans(h)
+
+syms z;
+X = ztrans(x, z); 
+X 

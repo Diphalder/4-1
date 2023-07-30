@@ -1,0 +1,12 @@
+In line no :1, Inserting  "i" with type  "INT_TYPE" in symbol table.
+In line no :4, Inserting  "l" with type  "INT_TYPE" in symbol table.
+In line no :5, Inserting  "af" with type  "INT_TYPE" in symbol table.
+In line no :7, Data type  "INT_TYPE" is not matched with Data type  "REAL_TYPE".
+ variable->l and k are not same 
+In line no :7, ID "k" is not declared.
+In line no :8, ID "j" is not declared.
+ variable->j and i are not same 
+In line no :9, Data type  "INT_TYPE" is not matched with Data type  "REAL_TYPE".
+ variable->i and k are not same 
+In line no :9, ID "k" is not declared.
+Parsing finished!

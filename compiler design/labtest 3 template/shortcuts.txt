@@ -1,0 +1,161 @@
+
+	mov dword ptr [ebp-0], eax
+
+INVOKE printf, ADDR output_integer_msg_format, eax
+INVOKE scanf, ADDR input_integer_format, ADDR number
+
+
+#######################  string print  ############
+
+s1 db "Current = ", 0 
+INVOKE printf, ADDR output_string_msg_format, ADDR s1
+
+
+##################  mulpiplication ################
+ imul eax, R
+
+#######################  division #####################
+
+mov edx , 0 
+mov eax , V 
+idiv R
+_____________
+eax is qoutient
+eda is reminder
+
+###################### if  #################################
+if (condi )
+{ stmnt }
+_____________________________________________________
+
+[ jump not condition ] SKIP
+stmnt
+SKIP :
+
+##########################  else if #############################
+
+if( condi )
+{stmnt-1}
+else
+{stmnt-2 }
+____________________________________________
+
+[ jump not condition ] ELSE
+	stmnt-1
+JMP EXIT
+ELSE :
+	stmnt-2
+EXIT :
+
+###################### case  ###########################
+case(x)
+value-1 : stmnt-1
+value-2 : stmnt-2
+.
+.
+default : stmnt-n
+______________________________________________--
+CMP X , value-1
+JE CASE_1 
+CMP X , value-2
+JE CASE_2
+CMP X , value-3
+JE CASE_3
+
+stmnt-n
+JMP END
+
+CASE_1 :
+	stmnt-1
+JMP END
+CASE_2 :
+	stmnt-2
+JMP END
+CASE_3 :
+	stmnt-4
+JMP END
+
+END:
+
+######################## AND ############################
+if(condi-1 and condi-2)
+{stmnt}
+__________________________________________
+
+[jump not condi-1] EXIT
+[jump not condi-2] EXIT
+stmnt
+EXIT :
+###################### OR ##############################
+if(condi-1 or condi-2)
+{stmnt}
+__________________________________________
+
+[jump condi-1] THEN
+[jump condi-2] THEN
+JMP EXIT
+THEN :
+	stmnt
+EXIT :
+####################### while loop #############################
+while(condi)
+{stmnt }
+__________________________________
+
+WHILE :
+[jump not condi] EXIT
+stmnt
+JMP WHILE
+EXIT:
+
+######################### for loop ###################################
+
+MOV ECX	, 10
+FOR :
+stmnt
+loop FOR
+
+############################# push pop #################################
+
+PUSH EAX
+POP EAX 
+PUSHF
+POPF
+
+
+push -> SP decrease by 4;
+pop -> SP increase by 4;
+
+
+#########################  procedure call  ####################################
+
+MAIN PROC 
+call myfun
+MAIN ENDP
+
+myfun PROC
+.
+.
+RET 
+ENDP
+########################base index ########################
+
+MOV EAX , W[EBX][ESI]
+MOV EAX , W[EBX + ESI]
+MOV EAX , [W+EBX+ESI]
+
+data segment : EBX , ESI , EDI
+stack segmtnt : EBP
+
+based : EBP , EBX
+index : ESI , EDI
+
+
+
+
+
+
+
+
+
+ 

@@ -4,28 +4,48 @@
 %{
 
 
-
 %}
+alpha     [a-zA-Z]
+digit     [0-9]
+alnum     {alpha}|{digit}
+print     [ -~]
 
-
-digit [0-9]
-alpha [a-zA-Z]
-id (_|{alpha})+(_|{digit}|{alpha})*
-INT ({digit})+
-float ({digit})*.({digit})+
-
-
+ID        {alpha}{alnum}*
+ICONST    [0-9]{digit}*
+FCONST    {digit}*"."{digit}+
+CCONST    (\'{print}\')
 %%
-"2"     {printf("NUM =>%s\t",yytext);}
-"+"     {printf("OP =>%s\t",yytext);}
-"I"     {printf("noun =>%s\t",yytext);}
-"eat"   {printf("verb =>%s\t",yytext);}
-"rice"  {printf("obj =>%s\t",yytext);}
-"You"   {printf("noun =>%s\t",yytext);}
-"love"  {printf("verb =>%s\t",yytext);}
-"apple" {printf("obj =>%s\t",yytext);}
-"We"    {printf("noun =>%s\t",yytext);}
-"mango" {printf("obj =>%s\t",yytext);}
+
+"//".*        { } 
+"function"	{printf("function ");}
+"end"	{printf("end ");}
+"return"	{printf("return ");}
+"begin"		{printf("begin ");}
+"int"       {printf("int ");}
+"float"    {printf("float ");}
+"char"      {printf("char ");}
+
+
+"+"       {printf("+ ");}
+"-"        {printf("- ");}
+"*"        {printf("* ");}
+"/"        {printf("/ ");}
+"=="       {printf("== ");}
+">"        {printf("> ");}
+"<"        {printf("< ");}
+"%"		 {printf("mod ");}
+":"		 {printf("colon ");}
+"("        {printf(") ");}
+")"       {printf("( ");}
+";"        {printf("semi ");}
+"="        {printf("= ");}
+"\'"		{ printf("quote ");}
+{ID}         {printf("id ");}
+{ICONST}     {printf("intdata ");}
+{FCONST}     {printf("fdat ");}
+{CCONST}     {printf("cdata ");}
+({alpha}|{digit})?   {printf("char ");}
+.       {}
 %%
 
 int main()

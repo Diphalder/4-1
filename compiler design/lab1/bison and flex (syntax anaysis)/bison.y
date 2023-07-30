@@ -8,7 +8,7 @@ int yylex();
 %start S
 
 %%
-S: N V O ;
+S: N V O { printf("accepted\n"); } ;
 %%
 
 int f=1;

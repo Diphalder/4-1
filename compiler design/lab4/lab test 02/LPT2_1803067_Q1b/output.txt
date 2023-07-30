@@ -1,0 +1,13 @@
+In line no :1, Inserting  "n" with type  "INT_TYPE" in symbol table.
+In line no :3, ID "a" is not declared.
+In line no :4, Inserting  "a" with type  "INT_TYPE" in symbol table.
+In line no :5, Same variable  "a" is declared more than once.
+In line no :6, Same variable  "a" is declared more than once.
+In line no :6, Data type  "INT_TYPE" is not matched with Data type  "REAL_TYPE".
+In line no :7, Inserting  "b" with type  "REAL_TYPE" in symbol table.
+In line no :8, Inserting  "c" with type  "CHAR_TYPE" in symbol table.
+In line no :9, Data type  "REAL_TYPE" is not matched with Data type  "CHAR_TYPE".
+In line no :9, Same variable  "a" is declared more than once.
+In line no :9, Data type  "INT_TYPE" is not matched with Data type  "REAL_TYPE".
+In line no :10, Data type  "INT_TYPE" is not matched with Data type  "REAL_TYPE".
+Parsing finished!

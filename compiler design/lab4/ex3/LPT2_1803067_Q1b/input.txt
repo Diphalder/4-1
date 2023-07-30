@@ -1,0 +1,7 @@
+dim i as integer
+For i = 1 To 9.9
+    For j = 10 To 20
+
+    i = a * 24
+    Next j
+Next k

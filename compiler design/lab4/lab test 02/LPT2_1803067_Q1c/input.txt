@@ -1,0 +1,11 @@
+function isEven(n : int)
+begin
+a = 10; 
+int a;
+int a = 10;
+int a = 10.0;
+float b = 10.0;
+char c = 'c';
+int a = b+c;
+return n % 2.0 == 0;
+end

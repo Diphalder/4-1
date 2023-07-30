@@ -1,0 +1,12 @@
+In line no :1, Inserting  "a" with type  "INT_TYPE" in symbol table.
+In line no :2, Inserting  "d" with type  "INT_TYPE" in symbol table.
+In line no :3, ID "e" is not declared.
+In line no :3, Data type  "INT_TYPE" is not matched with Data type  "UNDEF_TYPE".
+In line no :3, Inserting  "c" with type  "INT_TYPE" in symbol table.
+In line no :4, Inserting  "x" with type  "INT_TYPE" in symbol table.
+In line no :5, Data type  "INT_TYPE" is not matched with Data type  "REAL_TYPE".
+In line no :6, Inserting  "hi" with type  "REAL_TYPE" in symbol table.
+In line no :7, Data type  "REAL_TYPE" is not matched with Data type  "INT_TYPE".
+In line no :8, Inserting  "ruet" with type  "INT_TYPE" in symbol table.
+In line no :9, Inserting  "z" with type  "INT_TYPE" in symbol table.
+Parsing finished!

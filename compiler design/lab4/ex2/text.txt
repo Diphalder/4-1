@@ -1,0 +1,275 @@
+"[^"\\]*(?:\\.[^"\\]*)*"
+
+
+
+________________-example1
+code : INT DEF | DOUBLE DEF | CHAR DEF ;
+DEF :  ID ASSIGN OPST SEMI  |  ID SEMI ;
+OPST : ID ADDOP ID ;
+
+
+code : DEC code | DEC;
+DEC : INT DEF | DOUBLE DEF | CHAR DEF ;
+DEF :  ID ASSIGN OPST SEMI  |  ID SEMI ;
+OPST : ID OPST_ ;
+OPST_ : ADDOP ID OPST_ |  ; 
+
+
+input : 
+"int a = b + c ;
+double a = b + c ;"
+
+
+
+
+example2_______________
+
+%%
+code : DEC code | DEC;
+DEC : INT DEF | DOUBLE DEF | CHAR DEF ;
+DEF :  ID ASSIGN OPST SEMI  |  ID SEMI ;
+OPST : ID OPST_ ;
+OPST_ : ADDOP ID OPST_ |  SUBOP ID OPST_ | MULOP ID OPST_  | DIVOP ID OPST_ |;  
+%%
+
+
+input :
+int a = b + c ;
+double a = b + c ;
+int a = b + c *  d - e / x  ;
+
+
+
+
+_____________________---example3__________-
+
+%%
+code : DEC code |  DEC ;
+DEC : INT DEF | DOUBLE DEF | CHAR DEF ;
+DEF :  ID ASSIGN exp SEMI  |  ID SEMI ;
+exp : exp ADDOP terminal | terminal {printf("add op\n")};
+terminal : terminal MULOP factor | factor {printf("multiple op\n")} ;
+factor : ID | ICONST ;
+%%
+
+input :
+"int a = 10 + d * 100;"
+
+
+__________________________________example4__________
+
+%left LT GT /*LT GT has lowest precedence*/
+%left ADDOP 
+%left MULOP /*MULOP has highest precedence*/
+
+
+%%
+code : DEC code |  DEC ;
+DEC : INT DEF | DOUBLE DEF | CHAR DEF ;
+DEF :  ID ASSIGN exp SEMI  |  ID SEMI ;
+exp : exp ADDOP factor | exp MULOP factor | factor  ;
+factor : ID | ICONST ;
+%%
+
+
+input :
+"int a = 10 + d * 100;"
+
+________________________________example5__________
+
+
+%%
+code : DEC code | ifst code |  DEC  | ifst ;
+DEC : INT DEF | DOUBLE DEF | CHAR DEF ;
+DEF :  ID ASSIGN exp SEMI  |  ID SEMI ;
+exp : exp ADDOP factor | exp MULOP factor | factor  ;
+factor : ID | ICONST ;
+ifst : IF LPAREN condi RPAREN LBRACE code RBRACE ;
+condi : factor condiop factor | factor ;
+condiop : GT | LT | EQUOP ; 
+%%
+
+input:
+"int a = 10 + d * 100;
+
+if( a<5)
+{
+
+    int a = 10 + d * 100;
+    int a = 10 + d * 100;
+
+    if(a)
+    {
+        int a = 10 + d * 100;
+
+    }
+}
+"
+
+
+
+
+_______________________example6__________
+
+%%
+code : DEC code | ifst code |  DEC  | ifst  | ;
+DEC : INT DEF | DOUBLE DEF | CHAR DEF ;
+DEF :  ID ASSIGN exp SEMI  |  ID SEMI ;
+exp : exp ADDOP factor | exp condiop factor | exp MULOP factor | factor  ;
+factor : ID | ICONST ;
+ifst : IF LPAREN exp RPAREN LBRACE code RBRACE elsest ;
+condiop : GT | LT | EQUOP ; 
+elsest : ELSE LBRACE code RBRACE | ;
+%%
+
+input:
+"
+int a = 10 + d * 100;
+
+if( a<5)
+{
+
+    int a = 10 + d * 100;
+    int a = 10 + d * 100;
+
+    if(a)
+    {
+
+        int a = 10 + d * 100;
+
+
+    }
+
+}
+else
+{
+
+
+}
+
+if(10)
+    {
+
+        int a = 10 + d * 100;
+
+    }
+    else
+    {
+
+    }
+
+
+"
+
+
+
+
+
+________________________________example7__________
+
+
+%%
+code : DEC code | ifst code |  DEC  | ifst  | ;
+DEC : INT DEF | DOUBLE DEF | CHAR DEF ;
+DEF :  ID ASSIGN exp SEMI  |  ID SEMI ;
+exp : exp ADDOP factor | exp condiop factor | exp SUBOP factor |  exp DIVOP factor| exp MULOP factor | factor  ;
+factor : ID | ICONST ;
+ifst : IF LPAREN exp RPAREN LBRACE code RBRACE elsest ;
+condiop : GT | LT | EQUOP ; 
+elsest : ELSE LBRACE code RBRACE | ;
+%%
+
+input:"int a = 10 + d * 100;
+if( a<5)
+{
+   int a = 10 + d * 100;
+    int a = 10 + d * 100;
+    if(a)
+    {
+        int a = 10 + d * 100;
+    }
+
+}
+else
+{
+    double a = 10/100;
+}
+
+if(10)
+    {
+        int a = 10 + d * 100;
+    }
+    else
+    {
+
+    }
+
+"
+
+
+
+_________________________example8:______________________
+
+%token<str_val> ID
+%token<int_val> ICONST
+%union
+{
+	char str_val[100];
+	int int_val;
+}
+
+
+
+{ID}        {strcpy(yylval.str_val, yytext);  return ID;  }
+
+
+
+
+
+
+
+
+_________________________example9____________________________
+
+
+
+%type<int_val> type			/*return type of gettype() is int_val*/        
+%type<int_val> factor		/*return type of gettype() is int_val*/  
+%type<int_val> exp
+
+%left LT GT 			/*LT GT has lowest precedence*/
+%left ADDOP 
+%left MULOP 			/*MULOP has highest precedence*/
+
+
+
+%%
+code : DEC code | ifst code |  DEC  | ifst  | assign_val | assign_val code;
+DEC : type ID Z SEMI   { if(idcheck2($2)==0){insert($2 , $1);}};
+Z : ASSIGN exp | ;
+assign_val : ID ASSIGN exp SEMI;
+type : INT {$$=INT_TYPE} | DOUBLE{$$=REAL_TYPE}  ;
+exp : exp OP factor {if(typecheck($1,$3)){$$=$3;}} | factor {$$=$1; }  ;
+OP :  ADDOP | condiop | SUBOP | DIVOP | MULOP ;
+factor : ID { if(idcheck($1)){$$=gettype($1);}} | ICONST  {$$=INT_TYPE;} | FCONST   {$$=REAL_TYPE;};
+ifst : IF LPAREN exp RPAREN LBRACE code RBRACE elsest ;
+condiop : GT | LT | EQUOP ; 
+elsest : ELSE LBRACE code RBRACE | ;
+%%
+
+
+
+
+input :
+"
+int a ;
+int d ;
+int c= 10 + e * 100;
+int x;
+x = a * 100.1;
+double hi = 135.0;
+hi = hi + 10;
+int ruet =10;
+int z  = ruet +10;"
+
+
