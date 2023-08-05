@@ -1,18 +1,3 @@
-;START, 
-;HALT, 
-;LD_INT,               gen_code(LD_INT, data);     push data at OP-stack
-;LD_VAR,               gen_code(LD_VAR, address);  load from V-stack at address , push at OP-stack
-;STORE,                gen_code(STORE, address);   Load operation stack top data , store varible stack at Address
-;SCAN_INT_VALUE,       gen_code(SCAN_INT_VALUE, address);       Scan data, Store V-stack at address           
-;PRINT_INT_VALUE,      gen_code(PRINT_INT_VALUE, address);      load data from V-stack at address , print 
-;ADD,                  gen_code(ADD, -1)           pop 2 data from operation stack , ADD them , STORE operation-stack 
-;SUB,                  gen_code(SUB, -1)
-;MUL,                  gen_code(MUL, -1)
-;GT_OP,
-;LT_OP,
-
-;##############   1803067 ######################
-
 ;start -1
 .686
 .model flat, c

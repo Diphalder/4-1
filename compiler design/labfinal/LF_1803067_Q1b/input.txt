@@ -1,0 +1,8 @@
+SUB main ()
+suru
+       INT --> p
+       INT --> q
+       p soman  8
+       q soman p jog 12 - 1
+       print <-- q
+sesh

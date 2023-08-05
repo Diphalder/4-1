@@ -1,0 +1,4 @@
+Dim i As Integer
+For i = 1 To 10
+print(i)
+Next i

@@ -1,0 +1,17 @@
+
+Dim x As Single
+Dim i As Integer
+x = 0
+i = 1
+For i = 1 To 10
+x = x + i
+Next i
+If x > 1 Then
+print(x)
+End If
+x=105
+do
+x=x+5
+print(x)
+while(x<100)
+
