@@ -756,6 +756,545 @@ stem(time,Y);
 
 
 
+% use my raw code conv5 function 
+%index starts from 0
+x =[ 1, 1, 1, 1 ];
+idx = 1;
+h =[ 1,2 ,3,4 ];
+idh = 2;
+[Y, time]  = conv5(x,idx, h,idh);
+figure();
+stem(time,Y);
+
+
+conv(x,h)
+
+
+
+
+
+
+
+clear;
+x=[ 2     -1     1     3     -2     1     2    0];
+subplot(2,2,1)
+stem(x,'b','filled');
+grid on;
+axis([0 9 -3 4 ]);
+title({'Sequence X(n): ';num2str(x)});
+xlabel('Sample Number (n)')
+ylabel('Value');
+y=fft(x,8);
+real_y=real(y);
+imag_y=imag(y);
+subplot(2,2,2)
+stem(real_y,'o','filled');
+grid on;
+axis([0 9 min(real_y)-1 max(real_y)+1]);
+title({'Real part of 8-point DFT:';num2str(round(real_y*10)/10)});
+xlabel('Sample Number (n)')
+ylabel('Value of Real part');
+plot3=subplot(2,2,3)
+stem(imag_y,'o','filled');
+plot3.XTickMode='auto';
+grid on;
+axis([0 9 min(imag_y)-1 max(imag_y)+1]);
+title('hooola')
+title({'Imaginary part of 8-point DFT of Sequence X(n) ';
+num2str(round(imag_y*10)/10)});
+xlabel('Sample Number (n)')
+ylabel('Value of Imaginary part ');
+inverse_y=ifft(y,8);
+plot4=subplot(2,2,4)
+stem(inverse_y,'o','filled');
+grid on;
+axis([0 9 min(inverse_y)-1 max(inverse_y)+1]);
+title({'IInvesre of 8-point DFT:';num2str(round(inverse_y*10)/10)});
+xlabel('Sample Number (n)')
+ylabel('Value  ');
+print('DFT_sequence','-dpng');
+
+
+
+
+
+
+
+
+% Define the time domain
+t = linspace(0, 2*pi, 1000);
+% Define a signal (example: a Gaussian pulse)
+signal = exp(-0.5 * ((t - pi).^2) / 0.2);
+% Perform the Fourier transform
+signal_fft = fft(signal);
+% Calculate the frequency axis
+Fs = 1 / (t(2) - t(1)); % Sampling frequency
+frequencies = Fs * (-0.5:1/length(t):0.5 - 1/length(t));
+% Plot the magnitude of the Fourier transform
+figure;
+plot(frequencies, abs(fftshift(signal_fft)));
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+title('Fourier Transform');
+grid on;
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%fourier signal%%%%%%%%%%%%%%%%%
+% Define the time domain
+t = linspace(0, 2*pi, 1000);
+% Define the periodic signal (example: a square wave)
+f = square(t);
+% Number of harmonics to consider
+N = 10;
+% Initialize the Fourier series sum
+FS = zeros(size(t));
+% Calculate the Fourier series
+for n = 1:N
+    % Calculate the nth coefficient
+    an = (2/pi) * trapz(t, f .* cos(n*t)); % numerical integration
+    bn = (2/pi) * trapz(t, f .* sin(n*t));    
+    % Add the nth term to the series
+    FS = FS + an * cos(n*t) + bn * sin(n*t);
+end
+% Plot the original signal and the Fourier series approximation
+figure;
+plot(t, f, 'b', t, FS, 'r');
+legend('Original Signal', 'Fourier Series');
+xlabel('Time');
+ylabel('Amplitude');
+title('Fourier Series Approximation');
+grid on;
+
+
+
+%%%%%%%%%%%%%%%% fourier transform%%%%%%%%%%%%%%%
+% Define the time domain
+t = linspace(0, 2*pi, 100);
+% Define a signal (example: a Gaussian pulse)
+signal = exp(-0.5 * ((t - pi).^2) / 0.2);
+%singal=sin(t);
+% Perform the Fourier transform
+signal_fft = fftshift(fft(signal));
+% Calculate the frequency axis
+Fs = 1 / (t(2) - t(1)); % Sampling frequency
+frequencies = Fs * (-0.5:1/length(t):0.5 - 1/length(t));
+% Plot the magnitude and phase of the Fourier transform
+figure;
+subplot(2, 1, 1);
+plot(frequencies, abs(signal_fft));
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+title('Magnitude of Fourier Transform');
+grid on;
+subplot(2, 1, 2);
+plot(frequencies, angle(signal_fft));
+xlabel('Frequency (Hz)');
+ylabel('Phase (radians)');
+title('Phase of Fourier Transform');
+grid on;
+
+
+
+
+
+
+%%%%%%%%%%%%%%periodic signal fourier series%%%%%%%%%%%%%%%%
+x=[1,1, 0, 0];
+N=size(x,2);
+for k=0:N-1
+    c=0;
+    for p=0:N-1
+        %c = c+x(p+1)*exp(complex(0,-2*pi*p*k/N));
+        theta=-2*pi*k*p/N;
+        c = c+x(p+1)*(cos(theta)+1i*sin(theta));
+    end
+    c=c/N;
+    disp(c)
+end
+%%%%%%%%%%%%another way%%%%%%%  DFT %%%%%%%%%
+%x = [1, 1, 0, 0];
+t = linspace(0, 2*pi, 1000);
+x=sin(t);
+x=[2,3,2,1,0,1];
+N = length(x);
+fourierS=[];
+for k = 0:N-1
+    ck = 0;
+    for p = 0:N-1
+        ck = ck+x(p+1)*exp(-2i*pi*p*k/N);
+    end
+    ck = ck / N;
+    %disp(['c', num2str(k), ' = ', num2str(ck)]);
+    fourierS=[fourierS,ck];
+end
+%plot mahnitude
+figure;
+subplot(2, 1, 1);
+plot(abs(fourierS));
+xlabel('Frequency (k)');
+ylabel('Magnitude');
+title('Magnitude of Fourier Coefficients');
+% Plot phase
+subplot(2, 1, 2);
+plot(angle(fourierS));
+xlabel('Frequency (k)');
+ylabel('Phase (radians)');
+title('Phase of Fourier Coefficients');
+% Create a scatter plot in the complex plane
+figure;
+scatter(real(fourierS), imag(fourierS), 'o');
+xlabel('Real Part');
+ylabel('Imaginary Part');
+title('Complex Plane Plot of Fourier Coefficients');
+grid on;
+
+% inverse fourier
+X =[];
+for k = 0:N-1
+    ck = 0;
+    for p = 0:N-1
+        ck = ck+fourierS(p+1)*exp(-2i*pi*p*k/N);
+    end
+    ck = ck / N;
+    %disp(['c', num2str(k), ' = ', num2str(ck)]);
+    X=[X,ck];
+end
+figure;
+stem(X);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%fourier transform of sine wave %%%%%%%%%%%%%%%%
+amplitude = 1;         % Amplitude of the sine wave
+frequency = 5;         % Frequency of the sine wave in Hz
+duration = 1;          % Duration of the signal in seconds
+sampling_frequency = 1000;  % Sampling frequency in Hz
+t = 0:1/sampling_frequency:duration;
+sine_wave = amplitude * sin(2 * pi * frequency * t);
+sine_wave_fft = fft(sine_wave);
+N = length(sine_wave);
+frequencies = (0:N-1) * (sampling_frequency / N);
+figure;
+subplot(2, 1, 1);
+plot(frequencies, abs(sine_wave_fft));
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+title('Magnitude of Fourier Transform');
+grid on;
+% Plot the phase of the Fourier transform
+subplot(2, 1, 2);
+plot(frequencies, angle(sine_wave_fft));
+xlabel('Frequency (Hz)');
+ylabel('Phase (radians)');
+title('Phase of Fourier Transform');
+grid on;
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%%%%%  x(t) = cos(2π100t) + cos(2π500t)   %%%%%%%%%%%%%%%%%%%%
+N=250;
+ts=.0002;
+t=[0:N-1]*ts;
+x=cos(2*pi*100*t)+cos(2*pi*500*t);
+%x=sin(2*pi*100*t);
+figure;
+plot(t,x)
+grid on;
+k=0;
+for f=0:1000
+    k=k+1;
+    X(k)=trapz(t,x.*exp(-j*2*pi*f*t));
+end
+f=0:1000;
+figure;
+size(X)
+size(f)
+plot(f, abs(X))
+grid on;
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+N=250;
+ts=.0002;
+deltaf=1/(N*ts);
+t=[0:N-1]*ts;
+x=cos(2*pi*100*t)+cos(2*pi*500*t) + 8*sin(2*pi*900*t);
+%x=sin(2*pi*900*t);
+Xf=fft(x);
+f=[0:N-1]*deltaf;
+figure;
+plot(f,abs(Xf))
+figure;
+Xf_shift=fftshift(Xf);
+plot([-N/2:N/2-1]*deltaf, abs(Xf_shift))
+
+
+N=250;
+ts=.00125;
+deltaf=1/(N*ts);
+t=[0:N-1]*ts;
+x=cos(2*pi*100*t)+cos(2*pi*500*t);
+Xf=fft(x);
+Xf_shift=fftshift(Xf);
+figure;
+plot([-N/2:N/2-1]*deltaf, abs(Xf_shift))
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%% Fourier Series of a Sine Wave: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Parameters of the sine wave
+amplitude = 1;         % Amplitude of the sine wave
+frequency = 5;         % Frequency of the sine wave in Hz
+duration = 1;          % Duration of the signal in seconds
+sampling_frequency = 1000;  % Sampling frequency in Hz
+
+% Create a time vector
+t = 0:1/sampling_frequency:duration;
+
+% Generate the sine wave signal
+sine_wave = amplitude * sin(2 * pi * frequency * t);
+
+% Calculate the Fourier series coefficients
+N = length(sine_wave);
+T = 1 / sampling_frequency;
+frequencies = (0:N-1) / (N * T);
+fourier_series_coeffs = fft(sine_wave) / N;
+
+% Plot the original sine wave and its Fourier series
+figure;
+subplot(2, 1, 1);
+plot(t, sine_wave);
+xlabel('Time (s)');
+ylabel('Amplitude');
+title('Original Sine Wave');
+
+subplot(2, 1, 2);
+stem(frequencies, abs(fourier_series_coeffs));
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+title('Magnitude of Fourier Series Coefficients');
+grid on;
+%%%%%%%%%%%%%%%%  Fourier Transform of a Sine Wave: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Parameters of the sine wave
+amplitude = 1;         % Amplitude of the sine wave
+frequency = 5;         % Frequency of the sine wave in Hz
+duration = 1;          % Duration of the signal in seconds
+sampling_frequency = 1000;  % Sampling frequency in Hz
+
+% Create a time vector
+t = 0:1/sampling_frequency:duration;
+
+% Generate the sine wave signal
+sine_wave = amplitude * sin(2 * pi * frequency * t);
+
+% Perform the Fourier transform
+sine_wave_fft = fft(sine_wave);
+
+% Calculate the frequency axis
+N = length(sine_wave);
+frequencies = (0:N-1) * (sampling_frequency / N);
+
+% Plot the magnitude and phase of the Fourier transform
+figure;
+subplot(2, 1, 1);
+plot(frequencies, abs(sine_wave_fft));
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+title('Magnitude of Fourier Transform');
+grid on;
+
+subplot(2, 1, 2);
+plot(frequencies, angle(sine_wave_fft));
+xlabel('Frequency (Hz)');
+ylabel('Phase (radians)');
+title('Phase of Fourier Transform');
+grid on;
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+t = linspace(-8, 8, 1000);
+x=cos(2*pi*t/3)+cos(2*pi*t/5);
+Y = fft(x);
+X = ifft(Y);
+figure;
+plot(t, x);
+title('Sine wave');
+figure;
+subplot(2, 1, 1);
+plot(abs(Y))
+title('Fourier transform');
+subplot(2, 1, 2);
+plot(X);
+title('Inverse Fourier transform');
+figure;
+plot(real(Y), imag(Y));
+grid on;
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%% DTFT (apperiodic) fourier transform %%%%%%%%%%%%%%%%%%%%%%%%%
+
+x=[2,3,2,1,0,1,2,3,2,1,0,1,2,3,2,1,0,1,2,3,2,1,0,1,2,3,2,1,0,1];
+lw = -5 ;
+hi = length(x)+lw-1;
+fourier=[];
+w = -pi : 1/1000 : pi;
+for k=1:length(w)
+    ft=0;
+    for n=lw : hi
+        idx= n-lw+1 ;
+        ft=ft+x(idx)*exp(-1i*w(k)*n);
+    end
+    fourier=[fourier,ft];
+end
+figure;
+scatter(real(fourier),imag(fourier));
+title("scattered plot of fourier components")
+figure;
+subplot(2,1,1);
+plot(w,abs(fourier))
+title("magnitude of fourier transform")
+subplot(2,1,2);
+plot(w,angle(fourier))
+title("phase of fourier transform")
+
+%inverse fourier transform
+
+X=[];
+for n=lw : hi
+     idx= n-lw+1 ;
+     c=(1/(2*pi))*trapz(w,fourier.*exp(1i*w*n))  
+    X=[X,c];
+end
+figure;
+stem(X);
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+x=[2,3,2,1,0,1,2,3,2,1,0,1,2,3,2,1,0,1,2,3,2,1,0,1,2,3,2,1,0,1];
+Y=fft(x)
+X=ifft(Y)
+%plot mahnitude
+figure;
+subplot(2, 1, 1);
+plot(abs(Y));
+xlabel('Frequency (k)');
+ylabel('Magnitude');
+title('Magnitude of Fourier Coefficients');
+% Plot phase
+subplot(2, 1, 2);
+plot(angle(Y));
+xlabel('Frequency (k)');
+ylabel('Phase (radians)');
+title('Phase of Fourier Coefficients');
+
+
+%%%%%%%%%%%%%%%%%%%%DTFT (apperiodic) fourier transform  and inverse %%%%%%%%%%%%%%%%%%%%%%
+t=-pi:1/100:pi;
+x=sin(t);
+lw = -50 ;
+hi = length(x)+lw-1;
+fourier=[];
+w = -pi : 1/1000 : pi;
+for k=1:length(w)
+    ft=0;
+    for n=lw : hi
+        idx= n-lw+1 ;
+        ft=ft+x(idx)*exp(-1i*w(k)*n);
+    end
+    fourier=[fourier,ft];
+end
+figure;
+scatter(real(fourier),imag(fourier));
+title("scattered plot of fourier components")
+figure;
+subplot(2,1,1);
+plot(w,abs(fourier))
+title("magnitude of fourier transform")
+subplot(2,1,2);
+plot(w,angle(fourier))
+title("phase of fourier transform")
+%inverse fourier transform
+X=[];
+for n=lw : hi
+     idx= n-lw+1 ;
+     c=(1/(2*pi))*trapz(w,fourier.*exp(1i*w*n));
+    X=[X,c];
+end
+figure;
+stem(t,X);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%% coninous peridic fourier series  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+T=2*pi;
+t=-pi:1/1000:pi;
+x=sin(t);
+%x= square(t);
+lw=-25;
+N=50;
+hi=N+lw-1;
+K=lw:hi;
+ft=[];
+for k=lw:hi
+    f=(1/T)*trapz(t,x.*exp(-2i*pi*k*t/T));
+    ft=[ft,f];
+end
+figure;
+scatter(real(ft),imag(ft));
+title("scattered plot of fourier components")
+figure;
+subplot(2,1,1);
+plot(K,abs(ft))
+title("magnitude of fourier transform")
+subplot(2,1,2);
+plot(K,angle(ft))
+title("phase of fourier transform")
+%inverse
+X=[];
+for p=1:length(t)
+    c=0;
+    for k=lw:hi
+        idx=k-lw+1;
+        c=c+ft(idx)*exp(2i*pi*k*t(p)/T);
+    end
+    X=[X,c];
+end
+figure;
+plot(t,X,'b',t,x,'r')
+grid on;
+legend("used fourier","original signal")
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
 
 
 

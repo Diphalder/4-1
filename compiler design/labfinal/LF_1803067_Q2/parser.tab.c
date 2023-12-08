@@ -1530,12 +1530,13 @@ yyreduce:
 #line 124 "parser.y"
     {
 
-    (yyvsp[(6) - (13)].int_val)=gen_label();
-    (yyvsp[(10) - (13)].int_val)=gen_label();
+    
+    
     int address=idcheck((yyvsp[(2) - (13)].str_val));
     if(address!=-1)
     {
         // for case 20 : q++
+        (yyvsp[(6) - (13)].int_val)=gen_label();
         gen_code(LD_VAR,address);
         gen_code(LD_INT,(yyvsp[(5) - (13)].int_val));
         gen_code(EQL_OP,gen_label());
@@ -1551,6 +1552,7 @@ yyreduce:
 
 
         //19 : q--
+        (yyvsp[(10) - (13)].int_val)=gen_label();
         gen_code(LD_VAR,address);
         gen_code(LD_INT,(yyvsp[(9) - (13)].int_val));
         gen_code(EQL_OP,gen_label());
@@ -1577,7 +1579,7 @@ yyreduce:
 
 
 /* Line 1464 of yacc.c  */
-#line 1581 "parser.tab.c"
+#line 1583 "parser.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1789,7 +1791,7 @@ yyreturn:
 
 
 /* Line 1684 of yacc.c  */
-#line 168 "parser.y"
+#line 170 "parser.y"
 
 
 void yyerror ()

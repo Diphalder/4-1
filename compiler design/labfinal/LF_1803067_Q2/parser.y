@@ -123,12 +123,13 @@ printfun : PRINT COUT ID
     };
 casechk : CASE ID AR SURU ICONST COLON ID INC ICONST COLON ID DEC SESH {
 
-    $6=gen_label();
-    $10=gen_label();
+    
+    
     int address=idcheck($2);
     if(address!=-1)
     {
         // for case 20 : q++
+        $6=gen_label();
         gen_code(LD_VAR,address);
         gen_code(LD_INT,$5);
         gen_code(EQL_OP,gen_label());
@@ -144,6 +145,7 @@ casechk : CASE ID AR SURU ICONST COLON ID INC ICONST COLON ID DEC SESH {
 
 
         //19 : q--
+        $10=gen_label();
         gen_code(LD_VAR,address);
         gen_code(LD_INT,$9);
         gen_code(EQL_OP,gen_label());

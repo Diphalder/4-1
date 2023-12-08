@@ -4,11 +4,14 @@ suru
        INT --> q
        p soman  8
        q soman p jog 12 - 1
+     print <-- q
       case_check_kori q ar
+             
       suru
            20 : q++
            19 : q--   
        sesh
+       print <-- q
 
 sesh
 
